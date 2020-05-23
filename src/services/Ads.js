@@ -1,0 +1,9 @@
+export const FETCH_ADS_REQUEST = "FETCH_ADS_REQUEST";
+export const SET_FILTER = "SET_FILTER";
+export const FETCH_ADS_FILTERED = "FETCH_ADS_FILTERED";
+export const REGISTER_USER = "REGISTER_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const ADD_TO_FAVS = "ADD_TO_FAVS";
+export const REMOVE_FROM_FAVS = "REMOVE_FROM_FAVS";
+export const CREATE_AD = "CREATE_AD";
+export const EDIT_AD = "EDIT_AD";
