@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import {Container, Card, Row, Col} from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
+import AdsService from "../../services/Ads";
+
 import './Ads.css';
 
 export class Advertisments extends Component {
@@ -31,17 +33,23 @@ export class Advertisments extends Component {
     }
 
     componentDidMount = async () => {
-        const { history } = this.props;
+        // const { history } = this.props;
 
-        axios.defaults.withCredentials = true;
-        await axios.get('http://34.89.93.186:8080/apiv1/anuncios'
-        ).then(res => {
-            const ads = res.data.results;
-            this.setState({ ads });
-        }).catch(() => {
-            alert(`No se ha podido recuperar los anuncios, vuelve a intentarlo o loguéate`);
-            history.push("/login");
-        })
+        // axios.defaults.withCredentials = true;
+        // await axios.get('http://34.89.93.186:8080/apiv1/anuncios'
+        // ).then(res => {
+        //     const ads = res.data.results;
+        //     this.setState({ ads });
+        // }).catch(() => {
+        //     alert(`No se ha podido recuperar los anuncios, vuelve a intentarlo o loguéate`);
+        //     history.push("/login");
+        // })
+        this.loadAds();
+    }
+
+    loadAds = () => {
+        const ads = AdsService.getAllAds();
+        this.setState({ads})
     }
 
     navigateToDetail = (id) => {
