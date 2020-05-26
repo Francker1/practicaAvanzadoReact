@@ -1,8 +1,8 @@
-import React from 'react';
-import { render } from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import { render } from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import Root from "./components/Root";
 
@@ -12,9 +12,8 @@ import { configureStore } from "./store";
 const store = configureStore();
 
 render(
-    (<BrowserRouter>
+    <Router>
         <Root store={store} />
-    </BrowserRouter>
-    ), document.getElementById('root')
+    </Router>,
+    document.getElementById("root"),
 );
-

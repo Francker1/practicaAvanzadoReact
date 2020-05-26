@@ -7,6 +7,8 @@ const ads = [
         tags: ["lifestyle"],
         type: "buy",
         _id: "5e4af7273976de16b4d34277",
+        createdAt: "2015-05-26",
+        updatedAt: "2015-05-28",
     },
     { 
         description: "undefined",
@@ -16,6 +18,8 @@ const ads = [
         tags: ["work", "lifestyle", "motor"],
         type: "buy",
         _id: "5e53fb503976de16b4d343d0",
+        createdAt: "2015-05-26",
+        updatedAt: "2015-05-28",
     },
     {
         description: "a real dog of a dog",
@@ -25,6 +29,8 @@ const ads = [
         tags: [],
         type: "sell",
         _id: "5e551d2e3976de16b4d343f2",
+        createdAt: "2015-05-26",
+        updatedAt: "2015-05-28",
     },
     {
         description: "prueba de endpoint de la api",
@@ -34,6 +40,8 @@ const ads = [
         tags: ["lifestyle"],
         type: "buy",
         _id: "5e578e963976de16b4d344b6",
+        createdAt: "2015-05-26",
+        updatedAt: "2015-05-28",
     }
 ];
 

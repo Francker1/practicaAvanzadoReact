@@ -1,41 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import Front from "../common/home/Home";
 import Login from "../login/Login";
 import Register from "../register/Register";
-import Advertisments from "../ads/Ads";
+//import Advertisments from "../ads/Ads";
+import AdsBoard from "../AdsBoard";
 import AdDetail from "../ads/AdsDetail";
-import Filter from "../forms/Filters";
+//import Filter from "../forms/Filters";
 import AdsFiltered from "../ads/AdsFiltered";
 import CreateAdForm from "../forms/CreateAd";
 import EditAdForm from "../forms/EditAd";
 
+import styled from "styled-components";
 
-import styled from 'styled-components';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-
-import {Navbar, Nav } from "react-bootstrap";
-
+import { Navbar, Nav } from "react-bootstrap";
 
 const StyledLink = styled(Link)`
     color: palevioletred;
-	font-size: 1.25em;
-	margin: .5em;
-    
-    :hover{
+    font-size: 1.25em;
+    margin: 0.5em;
+
+    :hover {
         text-decoration: none;
-        color: #FFEAD0;
+        color: #ffead0;
     }
 `;
 
 export default class Home extends Component {
-    render(){
+    render() {
         return (
             <Router>
                 <Navbar className="menu" collapseOnSelect expand="lg">
@@ -50,23 +44,20 @@ export default class Home extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-              
-                    <Switch>
-                        <Route exact path="/" component={Front} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/registro" component={Register}/>
-                        <Route 
-                            path="/ads" 
-                            render={props => (
-                            <Advertisments {...props} />
-                            )}
-                            ></Route>
-                        <Route path={`/detail/:id`} component={AdDetail}/>
-                        <Route path="/filter" component={AdsFiltered} />
-                        <Route path="/crear" component={CreateAdForm} />
-                        <Route path="/editar" component={EditAdForm} />
-                    </Switch>
-                    
+
+                <Switch>
+                    <Route exact path="/" component={Front} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/registro" component={Register} />
+                    <Route
+                        path="/ads"
+                        render={props => <AdsBoard {...props} />}
+                    ></Route>
+                    <Route path={`/detail/:id`} component={AdDetail} />
+                    <Route path="/filter" component={AdsFiltered} />
+                    <Route path="/crear" component={CreateAdForm} />
+                    <Route path="/editar" component={EditAdForm} />
+                </Switch>
             </Router>
         );
     }
