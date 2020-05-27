@@ -1,7 +1,7 @@
 import React from "react";
 import T from "prop-types";
 //import classNames from 'classnames';
-import { Container, Card } from "react-bootstrap";
+import { Container, Row, Card } from "react-bootstrap";
 
 import AdsList from "../AdsList";
 
@@ -91,7 +91,9 @@ AdCard.propTypes = {
 export default function AdsGrid({ ads, addToFavs }) {
     return (
         <Container>
-            KeepAds
+            <Row>
+                KeepAds Listado
+            </Row>
             <AdsList
                 items={ads}
                 renderItem={ad => (
