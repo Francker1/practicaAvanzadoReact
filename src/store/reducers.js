@@ -22,7 +22,7 @@ export function user(state = initialState.user, action) {
 
 export function ads(state = initialState.ads, action) {
     switch (action.type) {
-        case TYPES.FETCH_ADS_REQUEST:
+        case TYPES.FETCH_ADS_SUCCESS:
             return action.ads;
 
         default:

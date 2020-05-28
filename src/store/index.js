@@ -1,15 +1,25 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { user, ads, filters, favs } from "./reducers";
+import ReduxThunk from "redux-thunk";
+import * as reducers from './reducers';
 
-const reducer = combineReducers({
-    user,
-    ads,
-    filters,
-    favs,
-});
+const createRootReducer = () =>
+  combineReducers({
+    ...reducers,
+  });
 
-export function configureStore(preState) {
-    const store = createStore(reducer, preState, composeWithDevTools());
-    return store;
+const configMiddleware = (config) => [
+    ReduxThunk.withExtraArgument(config)
+];
+
+const composeEnhancers = composeWithDevTools;
+
+export function configureStore(config) {
+    return function (preloadedState) {
+      const reducer = createRootReducer(config);
+      const middlewares = configMiddleware(config);
+      const enhancers = composeEnhancers(applyMiddleware(...middlewares));
+      const store = createStore(reducer, preloadedState, enhancers);
+      return store;
+    };
 }

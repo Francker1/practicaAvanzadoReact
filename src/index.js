@@ -9,7 +9,7 @@ import Root from "./components/Root";
 //import AdsService from "./services/Ads";
 import { configureStore } from "./store";
 
-const store = configureStore();
+const store = configureStore()();
 
 render(
     <Router>

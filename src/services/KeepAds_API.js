@@ -1,45 +1,40 @@
 import axios from "axios";
+import { API_URL } from "./constants/config-data";
 
 
-const KeepAdsAPI = API_URL => {
-
-    return{
 
         /**
          * Method GET all Advertisements
          */
-        getAllAds: () => {
+        export const getAllAds = async () => {
 
             const url = `${API_URL}/anuncios`;
 
             axios.defaults.withCredentials = true;
-            return axios.get(url).then(res => {
-                return res.data.results
-            })
-        },
+            const res = await axios.get(url);
+            return res.data.results;
+            
+        };
 
-        getOneAd: adId => {
+        export const getAdByID = async (adId) => {
             
             const url = `${API_URL}/anuncios/${adId}`;
             
             axios.defaults.withCredentials = true;
-            return axios.get(url).then(res => {
-                return res.data.results
-            })
-        }, 
+            const res =  axios.get(url);
+            return res;
+        };
 
-        getTags: () => {
+        export const getTags = async () => {
 
             const url = `${API_URL}/tags`;
 
             axios.defaults.withCredentials = true;
-            return axios.get(url)
-            .then(res => {
-                return res.data.results
-            })
-        },
+            const res =  axios.get(url);
+            return res;
+        };
 
-        filterAds: () => {
+        export const getFilteredAds = () => {
 
             const params = new URLSearchParams(window.location.search);
 
@@ -50,39 +45,10 @@ const KeepAdsAPI = API_URL => {
 
             axios.defaults.withCredentials = true;
 
-            return axios.get(`${API_URL}/anuncios?${adName}&${adVenta}&${adTag}&${adPrice}`)
-            .then(res => {
-                return res.data.results
-            })
+            const res = axios.get(`${API_URL}/anuncios?${adName}&${adVenta}&${adTag}&${adPrice}`)
+            return res;
 
-        }, 
+        };
 
-        createAd: ad => {
+       
 
-            const url = `${API_URL}/anuncios`;
-
-            axios.defaults.withCredentials = true;
-
-            return axios.post(url, null, {data: ad})
-            .then(res => {
-                return res.data.results
-            })
-        }, 
-
-        editAd: (ad, adId) => {
-
-            const url = `${API_URL}/anuncios/${adId}`;
-
-            axios.defaults.withCredentials = true;
-
-            return axios.put(url, null, {data: ad})
-            .then(res => {
-                return res.data.results
-            })
-        }, 
-
-    }
-}
-
-
-export default KeepAdsAPI;
