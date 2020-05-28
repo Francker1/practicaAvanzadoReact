@@ -37,8 +37,9 @@ export default function Home() {
                     <Route path="/filter" component={AdsFiltered} />
                     <Route path="/crear" component={CreateAdForm} />
                     <Route path="/editar" component={EditAdForm} />
+                    <Route path="/favs" />
                 </Switch>
-                
+
             </Router>
         );
     

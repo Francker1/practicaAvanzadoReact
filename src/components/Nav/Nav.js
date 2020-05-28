@@ -2,6 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
 
@@ -17,7 +18,7 @@ const StyledLink = styled(Link)`
 `;
 
 
-export default function NavbarMenu(){
+export default function NavbarMenu({totalFavAds}){
 
     return (
         <Navbar className="menu" collapseOnSelect expand="lg">
@@ -29,6 +30,9 @@ export default function NavbarMenu(){
                     <StyledLink to="/login">Login</StyledLink>
                     <StyledLink to="/registro">Registro</StyledLink>
                     <StyledLink to="/ads">Anuncios</StyledLink>
+                    <StyledLink to="/favs">
+                        <FavoriteIcon />{`(${totalFavAds})`}
+                    </StyledLink>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
