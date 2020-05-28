@@ -1,0 +1,36 @@
+import React from "react";
+
+import { Link } from "react-router-dom";
+
+import { Navbar, Nav } from "react-bootstrap";
+import styled from "styled-components";
+
+const StyledLink = styled(Link)`
+    color: palevioletred;
+    font-size: 1.25em;
+    margin: 0.5em;
+
+    :hover {
+        text-decoration: none;
+        color: #ffead0;
+    }
+`;
+
+
+export default function NavbarMenu(){
+
+    return (
+        <Navbar className="menu" collapseOnSelect expand="lg">
+            <StyledLink to="/">KeepAds</StyledLink>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto"></Nav>
+                <Nav>
+                    <StyledLink to="/login">Login</StyledLink>
+                    <StyledLink to="/registro">Registro</StyledLink>
+                    <StyledLink to="/ads">Anuncios</StyledLink>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    );
+}
