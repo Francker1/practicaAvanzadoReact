@@ -11,6 +11,7 @@ import AdDetail from "../ads/AdsDetail";
 import AdsFiltered from "../ads/AdsFiltered";
 import CreateAdForm from "../forms/CreateAd";
 import EditAdForm from "../forms/EditAd";
+import Favorites from "../Favs";
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -37,7 +38,7 @@ export default function Home() {
                     <Route path="/filter" component={AdsFiltered} />
                     <Route path="/crear" component={CreateAdForm} />
                     <Route path="/editar" component={EditAdForm} />
-                    <Route path="/favs" />
+                    <Route path="/favs" component={Favorites} />
                 </Switch>
 
             </Router>

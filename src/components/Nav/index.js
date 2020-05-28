@@ -1,3 +1,13 @@
+import { connect } from "react-redux";
+import { getTotalFavsAds } from "../../store/selectors";
+
 import Navbar from './Nav';
 
-export default Navbar;
+
+function mapStateToProps(state, ownProps) {
+    return {
+        totalFavAds: getTotalFavsAds(state),
+    }
+}
+
+export default connect(mapStateToProps)(Navbar);
