@@ -16,4 +16,8 @@ export const CREATE_AD = "CREATE_AD";
 export const EDIT_AD = "EDIT_AD";
 
 export const REGISTER_USER = "REGISTER_USER";
-export const LOGIN_USER = "LOGIN_USER";
+
+
+export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
+export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";

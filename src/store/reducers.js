@@ -12,7 +12,7 @@ export function user(state = initialState.user, action) {
         case TYPES.REGISTER_USER:
             return action.user;
 
-        case TYPES.LOGIN_USER:
+        case TYPES.FETCH_USER_SUCCESS:
             return action.user;
 
         default:

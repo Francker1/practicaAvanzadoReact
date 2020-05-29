@@ -4,6 +4,9 @@ import * as KeepAds_API from "../services/KeepAds_API";
 
 //actions creators
 
+/**
+ * Actions get Ads
+ */
 export const fetchAdsRequest = () => ({
     type: TYPES.FETCH_ADS_REQUEST,
 });
@@ -23,7 +26,12 @@ export const fetchAds = () =>
         dispatch(fetchAdsRequest());
         try{
             const ads = await KeepAds_API.getAllAds();
+            const user = await  {
+                username: localStorage.getItem("user"),
+                loggedIn: localStorage.getItem("loggedIn")
+            }
             dispatch(fetchAdsSuccess(ads));
+            console.log(user);
         } catch(err){
             dispatch(fetchAdsFailure(err));
         }
@@ -37,6 +45,9 @@ export const setFilters = filters => ({
 });
 
 
+/**
+ * Actions set Favorites Ads
+ */
 export const addToFavsRequest = () => ({
     type: TYPES.ADD_TO_FAVS_REQUEST,
 });
@@ -66,20 +77,42 @@ export const removeFromFavs = adId => ({
     adId,
 });
 
+
+
 export const registerUser = user => ({
     type: TYPES.REGISTER_USER,
     user,
 });
 
-export const loginUser = user => ({
-    type: TYPES.LOGIN_USER,
+
+/**
+ * Actions to get User data
+ */
+
+export const fetchUser = () => 
+    async function (dispatch, getState) {
+        dispatch(fetchUserRequest());
+        try{
+            const user = await  {
+                username: localStorage.getItem("user"),
+                loggedIn: localStorage.getItem("loggedIn")
+            }
+            dispatch(fetchUserSuccess(user));
+        } catch(err){
+            dispatch(fetchUserFailure(err));
+        }
+    };
+
+export const fetchUserRequest = () => ({
+    type: TYPES.FETCH_USER_REQUEST,
+});
+
+export const fetchUserSuccess = user => ({
+    type: TYPES.FETCH_USER_SUCCESS,
     user,
 });
 
-//crear un action
-
-//a ese action le va a llegar el array de favs
-
-//comprobar si el valor del id es true
-
-//devolverlo si está en favs
+export const fetchUserFailure = error => ({
+    type: TYPES.FETCH_USER_FAILURE,
+    error,
+});

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from 'react-redux';
 
 import Front from "../common/home/Home";
 import Navbar from "../Nav";
@@ -13,13 +14,18 @@ import CreateAdForm from "../forms/CreateAd";
 import EditAdForm from "../forms/EditAd";
 import Favorites from "../Favs";
 
+import { fetchUser } from "../../store/actions";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
-
-
 export default function Home() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchUser());
+    }, [dispatch]);
     
         return (
             <Router>

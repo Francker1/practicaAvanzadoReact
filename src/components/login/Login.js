@@ -37,9 +37,9 @@ class Login extends Component{
             password: password
         })
         .then((res) => {
-            history.push("/ads");
             localStorage.setItem("user", username);
-            localStorage.setItem("isLogged", res.data.success);
+            localStorage.setItem("loggedIn", res.data.success);
+            history.push("/ads");
         }).catch(err => {
             alert(`Usuario no encontrado || ${err.response.data.error}`);
             history.push("/registro");

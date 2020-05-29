@@ -35,7 +35,9 @@ class Register extends Component{
             username: username,
             password: password 
         })
-        .then(() => {
+        .then((res) => {
+            localStorage.setItem("user", username);
+            localStorage.setItem("loggedIn", res.data.success);
             history.push("/ads");
         }).catch(() => {
             alert("Algo salió mal, vuelve a intentarlo. Lo Sentimos!!");
