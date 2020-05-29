@@ -3,6 +3,7 @@ import T from "prop-types";
 //import classNames from 'classnames';
 import { Container, Row, Card } from "react-bootstrap";
 
+import ButtonFavs from "../common/buttons/ButtonAdFavs";
 import AdsList from "../AdsList";
 
 function AdCard({
@@ -52,9 +53,9 @@ function AdCard({
                 </Card.Body>
             </Card>
 
-            <button className="button" onClick={onAddToFavsClick}>
-                Añadir a Favoritos
-            </button>
+            <ButtonFavs
+                action={onAddToFavsClick} 
+            />{' '}
 
             <button
                 className="btn-edit"
