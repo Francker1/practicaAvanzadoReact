@@ -1,12 +1,13 @@
 import React from "react";
-import T from "prop-types";
-//import classNames from 'classnames';
-import { Container, Row, Card } from "react-bootstrap";
 
-import ButtonFavs from "../common/buttons/ButtonAdFavs";
+import T from "prop-types";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 import AdsList from "../AdsList";
 
-function AdCard({
+
+function AdFavCard({
     _id,
     photo,
     name,
@@ -16,7 +17,6 @@ function AdCard({
     tags,
     createdAt,
     updatedAt,
-    onAddToFavsClick,
 }) {
     return (
         <>
@@ -52,32 +52,11 @@ function AdCard({
                     </Card.Footer>
                 </Card.Body>
             </Card>
-
-            <ButtonFavs
-                action={onAddToFavsClick} 
-            />{' '}
-
-            <button
-                className="btn-edit"
-                onClick={() => {
-                    this.navigateToEdit(
-                        _id,
-                        name,
-                        description,
-                        price,
-                        type,
-                        photo,
-                        tags,
-                    );
-                }}
-            >
-                Editar Anuncio
-            </button>
         </>
     );
 }
 
-AdCard.propTypes = {
+AdFavCard.propTypes = {
     _id: T.string.isRequired,
     photo: T.string,
     name: T.string.isRequired,
@@ -89,26 +68,33 @@ AdCard.propTypes = {
     updatedAt: T.string.isRequired,
 };
 
-export default function AdsGrid({ ads, addToFavs }) {
+
+export default function Favorites({ items }) {
     return (
         <Container>
             <Row>
-                KeepAds Listado
+                <Col>
+                    <Link className="link" to="/ads">
+                        <Button variant="outline-secondary">Volver A Anuncios</Button>
+                    </Link>{' '}
+                </Col>
             </Row>
-            <AdsList
-                items={ads}
-                renderItem={ad => (
-                    <AdCard
-                        {...ad}
-                        onAddToFavsClick={() => addToFavs(ad._id)}
+
+            <Row>
+                <Col>
+                    <h3>Mis Anuncios Favoritos</h3>
+                    <AdsList
+                        items={items}
+                        renderItem={ad => (
+                            <AdFavCard {...ad} />
+                        )}
                     />
-                )}
-            />
+                </Col>
+            </Row>
         </Container>
     );
 }
 
-AdsGrid.propTypes = {
+Favorites.propTypes = {
     ads: T.arrayOf(T.shape({ _id: T.string.isRequired })),
-    addToFavs: T.func.isRequired,
 };

@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Front from "../common/home/Home";
+import Navbar from "../Nav";
 import Login from "../login/Login";
 import Register from "../register/Register";
 //import Advertisments from "../ads/Ads";
@@ -10,40 +11,20 @@ import AdDetail from "../ads/AdsDetail";
 import AdsFiltered from "../ads/AdsFiltered";
 import CreateAdForm from "../forms/CreateAd";
 import EditAdForm from "../forms/EditAd";
+import Favorites from "../Favs";
 
-import styled from "styled-components";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Navbar, Nav } from "react-bootstrap";
 
-const StyledLink = styled(Link)`
-    color: palevioletred;
-    font-size: 1.25em;
-    margin: 0.5em;
 
-    :hover {
-        text-decoration: none;
-        color: #ffead0;
-    }
-`;
 
-export default class Home extends Component {
-    render() {
+export default function Home() {
+    
         return (
             <Router>
-                <Navbar className="menu" collapseOnSelect expand="lg">
-                    <StyledLink to="/">KeepAds</StyledLink>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto"></Nav>
-                        <Nav>
-                            <StyledLink to="/login">Login</StyledLink>
-                            <StyledLink to="/registro">Registro</StyledLink>
-                            <StyledLink to="/ads">Anuncios</StyledLink>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
+                
+                <Navbar />
 
                 <Switch>
                     <Route exact path="/" component={Front} />
@@ -57,8 +38,10 @@ export default class Home extends Component {
                     <Route path="/filter" component={AdsFiltered} />
                     <Route path="/crear" component={CreateAdForm} />
                     <Route path="/editar" component={EditAdForm} />
+                    <Route path="/favs" component={Favorites} />
                 </Switch>
+
             </Router>
         );
-    }
+    
 }

@@ -16,8 +16,5 @@ function mapDispatchToProps(dispatch, ownProps) {
     };
 }
 
-// const mapDispatchToProps = {
-//     addToFavs,
-// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdsGrid);
