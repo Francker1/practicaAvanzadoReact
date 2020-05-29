@@ -1,7 +1,8 @@
 import React from "react";
 
 import T from "prop-types";
-import { Container, Row, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import AdsList from "../AdsList";
 
@@ -68,18 +69,28 @@ AdFavCard.propTypes = {
 };
 
 
-export default function Favorites({ ads }) {
+export default function Favorites({ items }) {
     return (
         <Container>
             <Row>
-            <h3>Mis Anuncios Favoritos</h3>
+                <Col>
+                    <Link className="link" to="/ads">
+                        <Button variant="outline-secondary">Volver A Anuncios</Button>
+                    </Link>{' '}
+                </Col>
             </Row>
-            <AdsList
-                items={ads}
-                renderItem={ad => (
-                    <AdFavCard {...ad} />
-                )}
-            />
+
+            <Row>
+                <Col>
+                    <h3>Mis Anuncios Favoritos</h3>
+                    <AdsList
+                        items={items}
+                        renderItem={ad => (
+                            <AdFavCard {...ad} />
+                        )}
+                    />
+                </Col>
+            </Row>
         </Container>
     );
 }

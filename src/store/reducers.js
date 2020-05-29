@@ -4,7 +4,7 @@ const initialState = {
     user: {},
     ads: [],
     filters: "",
-    favs: {},
+    favs: [],
 };
 
 export function user(state = initialState.user, action) {
@@ -43,10 +43,7 @@ export function filters(state = initialState.filters, action) {
 export function favs(state = initialState.favs, action) {
     switch (action.type) {
         case TYPES.ADD_TO_FAVS:
-            return { 
-                ...state,
-                _id: action.adId
-            };
+            return [...state, action.adId];
 
         case TYPES.REMOVE_FROM_FAVS:
             return state.filter(ad => ad !== action.adId);

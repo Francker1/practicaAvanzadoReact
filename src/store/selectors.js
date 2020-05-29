@@ -10,23 +10,11 @@ export function getItemsFavs(state){
 
     const ads = getAds(state);
     const favs = getFavs(state);
-console.log(favs);
-console.log(ads);
-    // return favs.map(entry => {
-    //     const ad = ads.find(ad => ad._id === entry);
-    //     return { ...ad };
-    //   });
 
-    // return favs.map(entry => {
-    //     const { adId } = entry;
-    //     const ad = ads.find(ad => ad._id === adId);
-    //     return { ...ad }
-    // })
-
-    return Object.entries(favs).map(entry => {
-        const [ adId ] = entry;
-        const ad = favs.find(ad => ad._id === adId);
+    const data = favs.map(search => {
+        const ad = ads.find(ad => ad._id === search);
         return { ...ad };
       });
-   
+
+    return data;
 }
