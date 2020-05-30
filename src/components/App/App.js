@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import React from "react";
 
 import Front from "../common/home/Home";
 import Navbar from "../Nav";
 import Login from "../login/Login";
 import Register from "../register/Register";
-//import Advertisments from "../ads/Ads";
 import AdsBoard from "../AdsBoard";
 import AdDetail from "../AdsDetail";
-//import Filter from "../forms/Filters";
 import AdsFiltered from "../ads/AdsFiltered";
 import CreateAdForm from "../forms/CreateAd";
 import EditAdForm from "../forms/EditAd";

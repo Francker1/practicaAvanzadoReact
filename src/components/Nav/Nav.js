@@ -27,8 +27,6 @@ export default function NavbarMenu({totalFavAds}){
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto"></Nav>
                 <Nav>
-                    <StyledLink to="/login">Login</StyledLink>
-                    <StyledLink to="/registro">Registro</StyledLink>
                     <StyledLink to="/ads">Anuncios</StyledLink>
                     <StyledLink to="/favs">
                         <FavoriteIcon />{`(${totalFavAds})`}
