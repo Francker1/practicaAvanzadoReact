@@ -50,5 +50,27 @@ import { API_URL } from "./constants/config-data";
 
         };
 
+
+        export const registerUser = async (username, password) => {
+
+            const url = `${API_URL}/register`;
+            const res = await axios.post(url, {
+                username, 
+                password,
+            });
+
+            return res;
+        }
+
+        export const loginUser = async (username, password) => {
+
+            const url = `${API_URL}/login`;
+            const res = await axios.post(url, {
+                username, 
+                password,
+            });
+            console.log(res);
+            return res;
+        }
        
 

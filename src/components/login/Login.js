@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import  { Container, Form } from 'react-bootstrap' ;
 import { Link, withRouter } from "react-router-dom";
 import { FormButton } from "../common/buttons/btn";
 
-
+import { loginUser } from "../../services/KeepAds_API";
 class Login extends Component{
 
     constructor(props){
@@ -32,10 +31,7 @@ class Login extends Component{
         const {history} = this.props;
         const {username, password} = this.state;
 
-        await axios.post("http://34.89.93.186:8080/apiv1/login", {  
-            username: username,
-            password: password
-        })
+        await loginUser(username, password)
         .then((res) => {
             localStorage.setItem("user", username);
             localStorage.setItem("loggedIn", res.data.success);
