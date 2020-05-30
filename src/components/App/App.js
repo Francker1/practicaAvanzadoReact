@@ -7,7 +7,7 @@ import Login from "../login/Login";
 import Register from "../register/Register";
 //import Advertisments from "../ads/Ads";
 import AdsBoard from "../AdsBoard";
-import AdDetail from "../ads/AdsDetail";
+import AdDetail from "../AdsDetail";
 //import Filter from "../forms/Filters";
 import AdsFiltered from "../ads/AdsFiltered";
 import CreateAdForm from "../forms/CreateAd";

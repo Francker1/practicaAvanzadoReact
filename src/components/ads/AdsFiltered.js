@@ -24,7 +24,6 @@ function AdsFiltered(){
         const fetchData = async () => {
             const res = await axios.get(url);
             setAds(res.data.results)
-            console.log(res)
         }
 
         fetchData(url);
