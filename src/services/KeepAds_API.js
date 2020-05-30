@@ -16,7 +16,7 @@ import { API_URL } from "./constants/config-data";
             
         };
 
-        export const getAdByID = async (adId) => {
+        export const getAdByID = async adId => {
             
             const url = `${API_URL}/anuncios/${adId}`;
             
