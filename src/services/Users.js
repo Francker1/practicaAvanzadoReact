@@ -1,6 +1,6 @@
 const user = {
-    username: "italo",
-    loggedIn: true,
+    username: localStorage.getItem("user"),
+    loggedIn: localStorage.getItem("loggedIn"),
 }
 
 export default {

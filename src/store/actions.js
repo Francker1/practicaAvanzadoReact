@@ -1,7 +1,6 @@
 import * as TYPES from "./types";
-//import AdsService from "../services/Ads";
-import * as KeepAds_API from "../services/KeepAds_API";
-
+import AdsService from "../services/Ads";
+import userService  from "../services/Users";
 //actions creators
 
 /**
@@ -25,13 +24,9 @@ export const fetchAds = () =>
     async function (dispatch, getState) {
         dispatch(fetchAdsRequest());
         try{
-            const ads = await KeepAds_API.getAllAds();
-            const user = await  {
-                username: localStorage.getItem("user"),
-                loggedIn: localStorage.getItem("loggedIn")
-            }
+            const ads = await AdsService.getAllAds();
             dispatch(fetchAdsSuccess(ads));
-            console.log(user);
+
         } catch(err){
             dispatch(fetchAdsFailure(err));
         }
@@ -93,10 +88,7 @@ export const fetchUser = () =>
     async function (dispatch, getState) {
         dispatch(fetchUserRequest());
         try{
-            const user = await  {
-                username: localStorage.getItem("user"),
-                loggedIn: localStorage.getItem("loggedIn")
-            }
+            const user = await userService.getUserInfo();
             dispatch(fetchUserSuccess(user));
         } catch(err){
             dispatch(fetchUserFailure(err));

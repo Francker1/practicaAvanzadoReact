@@ -7,7 +7,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Filter from "../forms/Filters";
 import AdsGrid from "../AdsGrid";
 
-import { fetchAds } from "../../store/actions";
+import { fetchAds, fetchUser } from "../../store/actions";
 
 function ButtonCreateAd() {
     return (
@@ -26,6 +26,7 @@ export default function AdsBoard() {
 
     useEffect(() => {
         dispatch(fetchAds());
+        dispatch(fetchUser());
     }, [dispatch]);
 
     return (
