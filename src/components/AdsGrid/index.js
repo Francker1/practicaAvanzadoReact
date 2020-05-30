@@ -4,6 +4,7 @@ import AdsGrid from "./AdsGrid";
 
 import { addToFavs } from "../../store/actions";
 
+
 function mapStateToProps(state, ownProps) {
     return {
         ads: state.ads,

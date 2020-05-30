@@ -9,7 +9,7 @@ const initialState = {
 
 export function user(state = initialState.user, action) {
     switch (action.type) {
-        case TYPES.REGISTER_USER:
+        case TYPES.REGISTER_USER_SUCCESS:
             return action.user;
 
         case TYPES.FETCH_USER_SUCCESS:

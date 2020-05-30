@@ -1,7 +1,5 @@
 import * as TYPES from "./types";
-//import AdsService from "../services/Ads";
-import * as KeepAds_API from "../services/KeepAds_API";
-
+import AdsService from "../services/Ads";
 //actions creators
 
 /**
@@ -25,13 +23,9 @@ export const fetchAds = () =>
     async function (dispatch, getState) {
         dispatch(fetchAdsRequest());
         try{
-            const ads = await KeepAds_API.getAllAds();
-            const user = await  {
-                username: localStorage.getItem("user"),
-                loggedIn: localStorage.getItem("loggedIn")
-            }
+            const ads = await AdsService.getAllAds();
             dispatch(fetchAdsSuccess(ads));
-            console.log(user);
+
         } catch(err){
             dispatch(fetchAdsFailure(err));
         }
@@ -78,10 +72,41 @@ export const removeFromFavs = adId => ({
 });
 
 
+/**
+ * Actions to register User data in store
+ */
 
-export const registerUser = user => ({
-    type: TYPES.REGISTER_USER,
+// export const registerUser = user => ({
+//     type: TYPES.REGISTER_USER,
+//     user,
+// });
+
+export const registerUser = () => 
+    async function (dispatch, getState) {
+        dispatch(registerUserRequest());
+        try{
+            const user = await {
+                username: localStorage.getItem("user"),
+                loggedIn: localStorage.getItem("loggedIn")
+            };
+            dispatch(registerUserSuccess(user));
+        } catch(err){
+            dispatch(registerUserFailure(err));
+        }
+    };
+
+export const registerUserRequest = () => ({
+    type: TYPES.REGISTER_USER_REQUEST,
+});
+
+export const registerUserSuccess = user => ({
+    type: TYPES.REGISTER_USER_SUCCESS,
     user,
+});
+
+export const registerUserFailure = error => ({
+    type: TYPES.REGISTER_USER_FAILURE,
+    error,
 });
 
 
@@ -93,10 +118,10 @@ export const fetchUser = () =>
     async function (dispatch, getState) {
         dispatch(fetchUserRequest());
         try{
-            const user = await  {
+            const user = await {
                 username: localStorage.getItem("user"),
                 loggedIn: localStorage.getItem("loggedIn")
-            }
+            };
             dispatch(fetchUserSuccess(user));
         } catch(err){
             dispatch(fetchUserFailure(err));
