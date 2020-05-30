@@ -39,26 +39,9 @@ function AdsFiltered(){
 }
 
 
-// function useAxios(path){
-
-//     const [data, setData] = useState(null);
-
-//     const url = `${API_URL}/${path}`;
-
-//     useEffect(() => {
-
-//         axios.get(url
-//             ).then(res => {
-//             const adsF = res.data.results;
-//             this.setState({ adsF });
-//         }).catch(() => {
-//             alert("Algo salió mal, y no pudimos filtrar los anuncios, vuelve a intentarlo :( Lo Sentimos!!");
-//         })
-
-//     }, [url]);
-// }
-
 export default AdsFiltered;
+
+//refactor momentáneo => falta interfaz de cards. Funcionalidad correcta con Hooks
 
 // export class AdsFiltered extends Component {
 
