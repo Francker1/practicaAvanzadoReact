@@ -69,7 +69,6 @@ import { API_URL } from "./constants/config-data";
                 username, 
                 password,
             });
-            console.log(res);
             return res;
         }
        
