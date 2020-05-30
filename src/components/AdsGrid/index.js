@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import AdsGrid from "./AdsGrid";
 
 import { addToFavs } from "../../store/actions";
+import { getUserInfo } from "../../store/selectors";
 
 function mapStateToProps(state, ownProps) {
     return {
         ads: state.ads,
+        user: getUserInfo(state),
     };
 }
 

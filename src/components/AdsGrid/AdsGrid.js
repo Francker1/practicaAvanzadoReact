@@ -1,6 +1,7 @@
 import React from "react";
 import T from "prop-types";
 //import classNames from 'classnames';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Container, Row, Card } from "react-bootstrap";
 
 import ButtonFavs from "../common/buttons/ButtonAdFavs";
@@ -89,11 +90,11 @@ AdCard.propTypes = {
     updatedAt: T.string.isRequired,
 };
 
-export default function AdsGrid({ ads, addToFavs }) {
+export default function AdsGrid({ user, ads, addToFavs }) {
     return (
         <Container>
-            <Row>
-                KeepAds Listado
+            <Row className="my-3">
+                <h4><AccountCircleIcon color="secondary"/> Howdy, {user.username}</h4>
             </Row>
             <AdsList
                 items={ads}
