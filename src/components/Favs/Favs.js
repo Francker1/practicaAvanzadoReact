@@ -20,11 +20,8 @@ function AdFavCard({
 }) {
     return (
         <>
-            <Card
-                onClick={() => {
-                    this.navigateToDetail(_id);
-                }}
-            >
+        <Link to={`/detail/${_id}`}>
+            <Card>
                 <Card.Img className="img-card" variant="top" src={photo} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
@@ -52,6 +49,7 @@ function AdFavCard({
                     </Card.Footer>
                 </Card.Body>
             </Card>
+        </Link>
         </>
     );
 }

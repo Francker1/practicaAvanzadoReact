@@ -32,7 +32,7 @@ export default function Home() {
                         path="/ads"
                         render={props => <AdsBoard {...props} />}
                     ></Route>
-                    <Route path={`/detail/:id`} component={AdDetail} />
+                    <Route path="/detail/:id" component={AdDetail} />
                     <Route path="/filter" component={AdsFiltered} />
                     <Route path="/crear" component={CreateAdForm} />
                     <Route path="/editar" component={EditAdForm} />
