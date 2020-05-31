@@ -2,43 +2,45 @@ import React, { useState, useContext, createContext } from "react";
 import { Form } from "react-bootstrap";
 
 const FormContext = createContext({
-    data: {},
-    handleInputChange: () => {},
+  data: {},
+  handleInputChange: () => {},
 });
 
-
 export const FormKeepAds = ({ onSubmit, initialState, store, ...props }) => {
+  const [data, setData] = useState(initialState);
 
-    const [data, setData] = useState(initialState)
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setData({ ...data, [name]: value });
+  };
 
-    const handleInputChange = event => {
-        const { name, value } = event.target;
-        setData({ ...data, [name]: value });
-    };
+  const submitForm = (event) => {
+    event.preventDefault();
+    onSubmit(data);
+  };
 
-    const submitForm = (event) => {
-        event.preventDefault();
-        onSubmit(data);
-    };
+  return (
+    <FormContext.Provider value={{ data, handleInputChange }}>
+      <Form onSubmit={submitForm} {...props}>
+        {props.children}
+      </Form>
+    </FormContext.Provider>
+  );
+};
 
-    return (
+export const Input = ({ name, type, ...props }) => {
+  const { data, handleInputChange } = useContext(FormContext);
 
-        <FormContext.Provider value = {{data, handleInputChange}}>
-                <Form onSubmit={submitForm} {...props} >
-                    {props.children}
-                </Form>
-        </FormContext.Provider>
-    )
-}
-
-export const Input = ({name, type, ...props}) => {
-
-    const {data, handleInputChange} = useContext(FormContext);
-
-    return (
-        <Form.Group>
-            <Form.Label>{name}</Form.Label>
-            <Form.Control  name={name} type={type} onChange={handleInputChange} value={data[name]} {...props}  />
-        </Form.Group>
-    )
-}
+  return (
+    <Form.Group>
+      <Form.Label>{name}</Form.Label>
+      <Form.Control
+        name={name}
+        type={type}
+        onChange={handleInputChange}
+        value={data[name]}
+        {...props}
+      />
+    </Form.Group>
+  );
+};
