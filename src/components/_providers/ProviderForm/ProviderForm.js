@@ -36,8 +36,9 @@ export const Input = ({name, type, ...props}) => {
     const {data, handleInputChange} = useContext(FormContext);
 
     return (
-        <>
-            <Form.Control className="my-3" name={name} type={type} onChange={handleInputChange} value={data[name]} {...props}  />
-        </>
+        <Form.Group>
+            <Form.Label>{name}</Form.Label>
+            <Form.Control  name={name} type={type} onChange={handleInputChange} value={data[name]} {...props}  />
+        </Form.Group>
     )
 }
