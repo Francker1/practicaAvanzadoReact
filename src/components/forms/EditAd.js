@@ -1,188 +1,165 @@
-import React, { Component } from "react";
+import React, { useState, useEffect  } from 'react';
 import { Container, Row, Form, Col } from "react-bootstrap";
 import { TagsList } from "../../services/constants/ads-data";
-import { withRouter } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FormButton } from "../common/buttons/btn";
-import axios from "axios";
 
-class EditAdForm extends Component{
+import { getAdByID, updateAdvert } from "../../services/KeepAds_API";
+import  BackButton  from "./../common/buttons/ButtonBack";
 
-    constructor(props){
-        super(props);
 
-        const params = new URLSearchParams(window.location.search);
-        const { name, desc, price, type, photo, tags } = this.props.location.state;
+function EditAdForm(){
 
-        this.state = {
-            id: params.get("id"),
-            name: name,
-            desc: desc,
-            price: price,
-            type: type,
-            photo: photo,
-            tags: [tags],
-            newTags: ""
-        }
+    const [ ad, setAd ] = useState([]);
+    const [ message, setMessage ] = useState("");
+    const { id } = useParams();
+
+    const fetchData = async () => {
+        const res = await getAdByID(id);
+        setAd(res.data.result)
     }
 
-    
-    handleUpdateName = ev => this.setState( { name:ev.target.value } );
-    handleUpdatePhoto = ev => this.setState({ photo:ev.target.value });
-    handleUpdateDesc = ev => this.setState({ desc:ev.target.value });
-    handleUpdatePrice = ev => this.setState({ price:ev.target.value });
-    handleUpdateType = ev => this.setState({ type:ev.target.value });
+    useEffect(() => {
+        fetchData(id);
+    }, [id]);
 
-    handleUpdateTag = ev => {
-       
-        const opts = ev.target.options;
-        let value = []
 
-        for (var i = 1, l = opts.length; i < l; i++) {
-            if (opts[i].selected) {
-                value.push(opts[i].value);
-            }
-        }
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        setAd({ ...ad, [name]: value });
+    };
 
-        this.setState({newTags:value})
-
+    const data = {
+        name: ad.name,
+        price: parseInt(ad.price),
+        description: ad.description,
+        tags: ad.tags,
+        type: ad.type,
+        photo: ad.photo
     }
-    
-    handleSubmit = async ev => {
-        ev.preventDefault();
+   
+    const updateAd = async () => {
 
-        const {history} = this.props;
+        await updateAdvert(id, data)
+          .then(() => setMessage("El anuncio ha sido actualizado!"))
+          .catch(err => {
+            //ui errors
+            alert(`no se ha guardado tu cambio, lo sentimos. Inténtalo más tarde. ${err}` );            
+          });
+      };
 
-        axios.defaults.withCredentials = true;
-        await axios.put(`http://34.89.93.186:8080/apiv1/anuncios/${this.state.id}`, { 
-            name: this.state.name,
-            price: parseInt(this.state.price),
-            description: this.state.desc,
-            tags: (this.state.newTags) ? this.state.newTags : this.state.tags,
-            type: this.state.type,
-            photo: this.state.photo
-         }
-        ).then(() => {
-            history.push("/ads");
-        }).catch(err => {
-            alert(`no se ha guardado tu cambio, lo sentimos. ${err}` );
-            history.push("/editar");
-        })
-    }
+    return(
+        <Container>
+            <Row>
+                <BackButton>
+                    Volver
+                </BackButton>
+            </Row>
+            <Row className="mt-5 mb-3">
+                <Col className="col-12">
+                    <h3>Editar Anuncio </h3>
+                    <h6>ID: {ad._id}</h6>
+                </Col>
+            </Row>
+            <Form        
+                onSubmit={event => {
+                    event.preventDefault()
+                }}
+            >
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Título anuncio</Form.Label>
+                        <Form.Control 
+                            name="name" 
+                            type="text"
+                            value={ad.name} 
+                            placeholder="¿Qué vas a vender o comprar?" 
+                            onChange={handleInputChange}
+                        />
+                    </Form.Group>
+                </Form.Row>
 
-    Back = () => {
-        const {history} = this.props;
-        history.goBack();
-    }
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>URL imagen</Form.Label>
+                        <Form.Control 
+                            name="photo" 
+                            type="text" 
+                            value={ad.photo} 
+                            placeholder="Url de la imagen" 
+                            onChange={handleInputChange}
+                        />
+                    </Form.Group>
+                </Form.Row>
 
-    render(){
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Descripción anuncio</Form.Label>
+                        <Form.Control 
+                            as="textarea" 
+                            rows="4" 
+                            maxLength="240" 
+                            name="description"
+                            value={ad.description} 
+                            placeholder="Descríbelo un poco"
+                            onChange={handleInputChange}
+                        />
+                    </Form.Group>
 
-        const {name, photo, desc, tags, price, type} = this.state;
-        let tagsJoined;
-        if(tags){
-           tagsJoined = tags.map( t => `${t}`).join("");
-        }
+                    <Form.Group as={Col}>
+                        <Form.Label>Etiquetas</Form.Label>
+                        <Form.Control 
+                            name="tags" 
+                            as="select"
+                            multiple
+                            onChange={handleInputChange}
+                        >
+                            <TagsList />
+                        </Form.Control>
+                    </Form.Group>
+                </Form.Row>
 
-        return(
-            <Container>
-                <Row>
-                    <Col>
-                        <button onClick={this.Back}>Volver</button>
-                    </Col>
-                </Row>
-                <Row className="mt-5 mb-3">
-                    <Col className="col-12"><h3>Editar: {this.state.name}</h3></Col>
-                    <Col className="col-12"><p>Tags actuales: {tagsJoined}</p></Col>
-                </Row>
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Título anuncio</Form.Label>
-                            <Form.Control 
-                                name="name" 
-                                type="text"
-                                value={name} 
-                                placeholder="¿Qué vas a vender o comprar?" 
-                                onChange={this.handleUpdateName}
-                            />
-                        </Form.Group>
-                    </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Precio</Form.Label>
+                        <Form.Control 
+                            name="price" 
+                            type="number" 
+                            min="0"
+                            value={ad.price}
+                            placeholder="¿Por cuánto lo vendes o lo compras?" 
+                            onChange={handleInputChange}
+                        />
+                    </Form.Group>
 
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>URL imagen</Form.Label>
-                            <Form.Control 
-                                name="photo" 
-                                type="text" 
-                                value={photo} 
-                                placeholder="Url de la imagen" 
-                                onChange={this.handleUpdatePhoto}
-                            />
-                        </Form.Group>
-                    </Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>
+                            Tipo
+                        </Form.Label>
+                        <Form.Control
+                            as="select" 
+                            value={ad.type}
+                            name="type"
+                            onChange={handleInputChange}
+                        >
+                            <option value="sell" id="sell">Venta</option>
+                            <option value="buy" id="buy">Compra</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Form.Row>
 
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Descripción anuncio</Form.Label>
-                            <Form.Control 
-                                as="textarea" 
-                                rows="4" 
-                                maxLength="240" 
-                                name="description"
-                                value={desc} 
-                                placeholder="Descríbelo un poco"
-                                onChange={this.handleUpdateDesc}
-                            />
-                        </Form.Group>
+                <FormButton 
+                    type="submit"
+                    onClick={updateAd}>
+                    Actualizar
+                </FormButton>
 
-                        <Form.Group as={Col}>
-                            <Form.Label>Etiquetas</Form.Label>
-                            <Form.Control 
-                                name="tags" 
-                                as="select"
-                                multiple
-                                onChange={this.handleUpdateTag}
-                            >
-                                <TagsList />
-                            </Form.Control>
-                        </Form.Group>
-                    </Form.Row>
+                <p>{message}</p>
+            </Form>
+            
+        </Container>  
+    );
 
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Precio</Form.Label>
-                            <Form.Control 
-                                name="price" 
-                                type="number" 
-                                min="0"
-                                value={price}
-                                placeholder="¿Por cuánto lo vendes o lo compras?" 
-                                onChange={this.handleUpdatePrice}
-                            />
-                        </Form.Group>
-
-                        <Form.Group as={Col}>
-                            <Form.Label>
-                                Tipo
-                            </Form.Label>
-                            <Form.Control
-                                as="select" 
-                                value={type}
-                                onChange={this.handleUpdateType}
-                            >
-                                <option value="sell" id="sell">Venta</option>
-                                <option value="buy" id="buy">Compra</option>
-                            </Form.Control>
-                        </Form.Group>
-                    </Form.Row>
-
-                    <FormButton type="submit">
-                        Actualizar
-                    </FormButton>
-                </Form>
-               
-            </Container>  
-        );
-    }
 }
 
-export default withRouter(EditAdForm);
+export default EditAdForm;

@@ -1,0 +1,19 @@
+.ad__info{
+    font-size: 18px;
+}
+
+.ad__info > p > span{
+    font-weight: bold;
+}
+
+span.ad__tag{
+    background-color: palevioletred;
+    margin-right: 1.5em;
+    padding: .5em 2em;
+    border-radius: 25px;
+    color: aliceblue;
+}
+
+a:hover {
+    text-decoration: none;
+}

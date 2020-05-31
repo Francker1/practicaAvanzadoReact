@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import React from "react";
 
 import Front from "../common/home/Home";
 import Navbar from "../Nav";
 import Login from "../login/Login";
 import Register from "../register/Register";
-//import Advertisments from "../ads/Ads";
 import AdsBoard from "../AdsBoard";
-import AdDetail from "../ads/AdsDetail";
-//import Filter from "../forms/Filters";
+import AdDetail from "../AdsDetail";
 import AdsFiltered from "../ads/AdsFiltered";
 import CreateAdForm from "../forms/CreateAd";
 import EditAdForm from "../forms/EditAd";
@@ -32,10 +29,10 @@ export default function Home() {
                         path="/ads"
                         render={props => <AdsBoard {...props} />}
                     ></Route>
-                    <Route path={`/detail/:id`} component={AdDetail} />
+                    <Route path="/detail/:id" component={AdDetail} />
                     <Route path="/filter" component={AdsFiltered} />
                     <Route path="/crear" component={CreateAdForm} />
-                    <Route path="/editar" component={EditAdForm} />
+                    <Route path="/editar/:id" component={EditAdForm} />
                     <Route path="/favs" component={Favorites} />
                 </Switch>
 

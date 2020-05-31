@@ -1,5 +1,6 @@
 import React from "react";
 import T from "prop-types";
+import { Link } from "react-router-dom";
 
 import Username from "../_username";
 import { Container, Card } from "react-bootstrap";
@@ -21,11 +22,8 @@ function AdCard({
 }) {
     return (
         <>
-            <Card
-                onClick={() => {
-                    this.navigateToDetail(_id);
-                }}
-            >
+        <Link to={`/detail/${_id}`}>
+            <Card>
                 <Card.Img className="img-card" variant="top" src={photo} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
@@ -53,27 +51,10 @@ function AdCard({
                     </Card.Footer>
                 </Card.Body>
             </Card>
-
+            </Link>
             <ButtonFavs
                 action={onAddToFavsClick} 
             />{' '}
-
-            <button
-                className="btn-edit"
-                onClick={() => {
-                    this.navigateToEdit(
-                        _id,
-                        name,
-                        description,
-                        price,
-                        type,
-                        photo,
-                        tags,
-                    );
-                }}
-            >
-                Editar Anuncio
-            </button>
         </>
     );
 }
