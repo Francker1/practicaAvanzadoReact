@@ -1,88 +1,55 @@
-import React, { Component } from 'react';
-import  { Container, Form } from 'react-bootstrap' ;
-import { Link, withRouter } from "react-router-dom";
-import { FormButton } from "../common/buttons/btn";
+import React from "react";
+import { useHistory, Link } from "react-router-dom";
+
+import { Container, Row, Col } from "react-bootstrap";
+import { FormButton } from "../_common/buttons/btn";
+import { FormKeepAds, Input } from "../_providers/ProviderForm/ProviderForm";
 
 import { loginUser } from "../../services/KeepAds_API";
-class Login extends Component{
 
-    constructor(props){
-        super(props);
-        this.state={
-            username: "",
-            password: ""
-        }
-    }
-    
-    handleUsernameChange = ev => {
-        this.setState({
-            username: ev.target.value
-        });
-    }
+function Login() {
+  const history = useHistory();
 
-    handlePassChange = ev => {
-        this.setState({
-            password: ev.target.value
-        });
-    }
-    
-    handleSubmit = async (ev) => {
-        ev.preventDefault();
-        const {history} = this.props;
-        const {username, password} = this.state;
+  const handleSubmit = async data => {
+    await loginUser(data.username, data.password)
+      .then(res => {
+        localStorage.setItem("user", data.username);
+        localStorage.setItem("loggedIn", res.data.success);
+        history.push("/ads");
+      })
+      .catch(() => {
+        alert("Algo salió mal, vuelve a intentarlo. Lo Sentimos!!");
+        history.push("/registro");
+      });
+  };
 
-        await loginUser(username, password)
-        .then((res) => {
-            localStorage.setItem("user", username);
-            localStorage.setItem("loggedIn", res.data.success);
-            history.push("/ads");
-        }).catch(err => {
-            alert(`Usuario no encontrado || ${err.response.data.error}`);
-            history.push("/registro");
-        })
-    }
+  return (
+    <Container>
+      <Row className="my-5">
+        <Col>
+          <h3>Login</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <FormKeepAds
+            onSubmit={handleSubmit}
+            initialState={{ username: "", password: "" }}
+          >
+            <Input type="text" name="username" placeholder="username" />
+            <Input type="password" name="password" placeholder="password" />
 
-    render(){
-        const { username, password } = this.state;
-        return(
-            <Container className="mt-5">
-                <Form onSubmit={this.handleSubmit}>
-                    <div>
-                        <h2>Login</h2>
-                    </div>  
-                    <Form.Group>
-                        <Form.Label>Usuario</Form.Label>
-                        <Form.Control 
-                            required
-                            type="text" 
-                            placeholder="usuario" 
-                            value={username} 
-                            onChange={this.handleUsernameChange} 
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Contraseña</Form.Label>
-                        <Form.Control 
-                            required
-                            type="password" 
-                            placeholder="contraseña" 
-                            value={password}
-                            onChange={this.handlePassChange}
-                         />
-                    </Form.Group>
-                    <FormButton type="submit">
-                        Login
-                    </FormButton>
-                </Form>
-
-                <div>
-                    <p>Aún no estás registrado? 
-                        <Link to="/registro">Registrarse</Link>
-                    </p>                    
-                </div>
-            </Container>
-        );
-    }
+            <FormButton variant="primary" type="submit">
+              Iniciar sesión
+            </FormButton>
+          </FormKeepAds>
+          <p>
+            ¿Aún no estás registrado? <Link to="/registro">Registrarme</Link>
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default withRouter(Login);
+export default Login;

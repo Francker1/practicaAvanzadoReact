@@ -3,7 +3,7 @@ import {Container, Row, Col, Image, Button} from "react-bootstrap";
 import { useParams, Link} from "react-router-dom";
 
 import { getAdByID } from "../../services/KeepAds_API";
-import  BackButton  from "./../common/buttons/ButtonBack";
+import  BackButton  from "./../_common/buttons/ButtonBack";
 
 import "./AdsDetail.css";
 

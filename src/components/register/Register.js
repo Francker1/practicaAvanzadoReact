@@ -1,85 +1,56 @@
-import React, { Component } from 'react';
-import  { Container, Form } from 'react-bootstrap' ;
-import { withRouter } from "react-router-dom";
-import { FormButton } from "../common/buttons/btn";
+import React from "react";
+import { useHistory, Link } from "react-router-dom";
+
+import { Container, Row, Col } from "react-bootstrap";
+import { FormButton } from "../_common/buttons/btn";
+import { FormKeepAds, Input } from "../_providers/ProviderForm/ProviderForm";
 
 import { registerUser } from "../../services/KeepAds_API";
 
-class Register extends Component{
+function Register() {
+  const history = useHistory();
 
-    constructor(props){
-        super(props);
-        this.state = {
-            username: "", 
-            password: ""   
-        }
-    }
-    
-    handleUsernameChange = ev => {
-        this.setState({
-            username: ev.target.value
-        })
-    }
+  const handleSubmit = async (data) => {
+    await registerUser(data.username, data.password)
+      .then((res) => {
+        localStorage.setItem("user", data.username);
+        localStorage.setItem("loggedIn", res.data.success);
+        history.push("/ads");
+      })
+      .catch(() => {
+        alert("Algo salió mal, vuelve a intentarlo. Lo Sentimos!!");
+        history.push("/registro");
+      });
+  };
 
-    handlePassChange = ev =>{
-        this.setState({
-            password: ev.target.value
-        })
-    }
-    
-    handleSubmit = async ev => {
-        ev.preventDefault();
-        const {history} = this.props;
-        const {username, password} = this.state;
+  return (
+    <Container>
+      <Row className="my-5">
+        <Col>
+          <h3>Registro</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <FormKeepAds
+            onSubmit={handleSubmit}
+            initialState={{ username: "", password: "" }}
+          >
+            <Input type="text" name="username" placeholder="username" />
+            <Input type="password" name="password" placeholder="password" />
 
-        await registerUser(username, password)
-        .then((res) => {
-            localStorage.setItem("user", username);
-            localStorage.setItem("loggedIn", res.data.success);
-            history.push("/ads");
-        }).catch(() => {
-            alert("Algo salió mal, vuelve a intentarlo. Lo Sentimos!!");
-            history.push("/registro");
-        })
-
-    }
-
-
-    render(){
-        const { username, password } = this.state;
-        return(
-            <Container className="mt-5">
-                <Form onSubmit={this.handleSubmit}>
-                    <div>
-                        <h2>Registro</h2>
-                    </div>  
-                    <Form.Group>
-                        <Form.Label>Usuario</Form.Label>
-                        <Form.Control 
-                            required
-                            type="text" 
-                            placeholder="usuario" 
-                            value={username} 
-                            onChange={this.handleUsernameChange}   
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Contraseña</Form.Label>
-                        <Form.Control 
-                            required
-                            type="password" 
-                            placeholder="contraseña" 
-                            value={password}
-                            onChange={this.handlePassChange}
-                        />
-                    </Form.Group>
-                    <FormButton type="submit">
-                        Registrarse
-                    </FormButton>
-                </Form>
-            </Container>
-        );
-    }
+            <FormButton variant="primary" type="submit">
+              Registrarme
+            </FormButton>
+          </FormKeepAds>
+          <p>
+            ¿Ya tienes una cuenta en KeepAds?{" "}
+            <Link to="/login">Iniciar sesión</Link>
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default withRouter(Register);
+export default Register;

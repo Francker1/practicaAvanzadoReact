@@ -8,5 +8,5 @@ export default function ButtonBack({ children }) {
     <Button variant="info" onClick={() => history.goBack()}>
       {children}
     </Button>
-  )
+  );
 }

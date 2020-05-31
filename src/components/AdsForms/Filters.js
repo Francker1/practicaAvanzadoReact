@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Form, Col } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import { TagsList, PriceList } from "../../services/constants/ads-data"
-import { FormButton } from "../common/buttons/btn";
+import { FormButton } from "../_common/buttons/btn";
 
 export class Filter extends Component{
 

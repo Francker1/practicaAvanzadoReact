@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Username from "../_username";
 import { Container, Card } from "react-bootstrap";
 
-import ButtonFavs from "../common/buttons/ButtonAdFavs";
+import ButtonFavs from "../_common/buttons/ButtonAdFavs";
 import AdsList from "../AdsList";
 
 function AdCard({
