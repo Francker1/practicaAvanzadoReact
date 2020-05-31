@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Container, Row, Form, Col } from "react-bootstrap";
 import { TagsList } from "../../services/constants/ads-data";
 import { withRouter } from "react-router-dom";
-import { FormButton } from "../common/buttons/btn";
+import { FormButton } from "../_common/buttons/btn";
 
 import axios from "axios";
 

@@ -2,10 +2,10 @@ import React, { useState, useEffect  } from 'react';
 import { Container, Row, Form, Col } from "react-bootstrap";
 import { TagsList } from "../../services/constants/ads-data";
 import { useParams } from "react-router-dom";
-import { FormButton } from "../common/buttons/btn";
+import { FormButton } from "../_common/buttons/btn";
 
 import { getAdByID, updateAdvert } from "../../services/KeepAds_API";
-import  BackButton  from "../common/buttons/ButtonBack";
+import  BackButton  from "../_common/buttons/ButtonBack";
 
 
 function EditAdForm(){

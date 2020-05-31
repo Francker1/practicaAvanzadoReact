@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import  { Container, Form } from 'react-bootstrap' ;
 import { withRouter } from "react-router-dom";
-import { FormButton } from "../common/buttons/btn";
+import { FormButton } from "../_common/buttons/btn";
 
 import { registerUser } from "../../services/KeepAds_API";
 
