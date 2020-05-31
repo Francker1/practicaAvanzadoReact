@@ -30,11 +30,6 @@ export const fetchAds = () =>
     }
   };
 
-export const setFilters = (filters) => ({
-  type: TYPES.SET_FILTERS,
-  filters,
-});
-
 /**
  * Actions set Favorites Ads
  */
@@ -61,11 +56,6 @@ export const addToFavs = (adId) =>
       dispatch(addToFavsFailure(err));
     }
   };
-
-export const removeFromFavs = (adId) => ({
-  type: TYPES.REMOVE_FROM_FAVS,
-  adId,
-});
 
 /**
  * Actions to register User data in store

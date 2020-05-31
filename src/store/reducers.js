@@ -3,7 +3,6 @@ import * as TYPES from "./types";
 const initialState = {
   user: {},
   ads: [],
-  filters: "",
   favs: {},
 };
 
@@ -30,16 +29,6 @@ export function ads(state = initialState.ads, action) {
   }
 }
 
-export function filters(state = initialState.filters, action) {
-  switch (action.type) {
-    case TYPES.SET_FILTERS:
-      return action.filters;
-
-    default:
-      return state;
-  }
-}
-
 export function favs(state = initialState.favs, action) {
   switch (action.type) {
     case TYPES.ADD_TO_FAVS_SUCCESS:
@@ -47,9 +36,6 @@ export function favs(state = initialState.favs, action) {
         ...state,
         [action.adId]: true,
       };
-
-    case TYPES.REMOVE_FROM_FAVS:
-      return state.filter((ad) => ad._id !== action.adId);
 
     default:
       return state;
