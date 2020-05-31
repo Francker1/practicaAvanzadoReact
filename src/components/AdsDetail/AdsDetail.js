@@ -1,5 +1,5 @@
 import React, { useState, useEffect  } from 'react';
-import {Container, Row, Col, Image} from "react-bootstrap";
+import {Container, Row, Col, Image, Button} from "react-bootstrap";
 import { useParams, Link} from "react-router-dom";
 
 import { getAdByID } from "../../services/KeepAds_API";
@@ -23,7 +23,9 @@ function AdDetail(){
 
     return(
         <Container>
-            <BackButton>Volver</BackButton>
+            <BackButton>
+                Volver
+            </BackButton>
             <Row className="my-5">
                 <Col>
                     <h3>{ad.name}</h3>
@@ -49,6 +51,10 @@ function AdDetail(){
 
                 </Col>
             </Row>
+
+            <Button variant="outline-info">
+                <Link to={`/editar/${ad._id}`}>Editar Anuncio</Link>
+            </Button>
         </Container>
     )
 }

@@ -32,7 +32,7 @@ export default function Home() {
                     <Route path="/detail/:id" component={AdDetail} />
                     <Route path="/filter" component={AdsFiltered} />
                     <Route path="/crear" component={CreateAdForm} />
-                    <Route path="/editar" component={EditAdForm} />
+                    <Route path="/editar/:id" component={EditAdForm} />
                     <Route path="/favs" component={Favorites} />
                 </Switch>
 

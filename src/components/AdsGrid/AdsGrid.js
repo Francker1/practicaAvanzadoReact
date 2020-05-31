@@ -55,23 +55,6 @@ function AdCard({
             <ButtonFavs
                 action={onAddToFavsClick} 
             />{' '}
-
-            <button
-                className="btn-edit"
-                onClick={() => {
-                    this.navigateToEdit(
-                        _id,
-                        name,
-                        description,
-                        price,
-                        type,
-                        photo,
-                        tags,
-                    );
-                }}
-            >
-                Editar Anuncio
-            </button>
         </>
     );
 }
