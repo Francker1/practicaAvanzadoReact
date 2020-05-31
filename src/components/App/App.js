@@ -1,6 +1,6 @@
 import React from "react";
 
-import Front from "../common/home/Home";
+import Front from "../Home/Home";
 import Navbar from "../Nav";
 import Login from "../login/Login";
 import Register from "../register/Register";
