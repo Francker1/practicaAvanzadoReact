@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdsGrid snapshot testing 1`] = `
+<Container
+  fluid={false}
+>
+  <Connect(Username) />
+  <AdsList
+    items={
+      Array [
+        Object {
+          "_id": "5e43096e99660405061db854",
+          "createdAt": "2020-02-11T20:07:10.232Z",
+          "description": "test description",
+          "name": "incredibly awesome",
+          "photo": "https://pbs.twimg.com/media/Dpu128FWwAI_Bru?format=jpg",
+          "price": 15,
+          "tags": Array [
+            "lifestyle",
+          ],
+          "type": "sell",
+          "updatedAt": "2020-05-31T09:38:39.133Z",
+        },
+      ]
+    }
+    renderItem={[Function]}
+  />
+</Container>
+`;
