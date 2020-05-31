@@ -28,22 +28,10 @@ export const getTags = async () => {
   return res;
 };
 
-export const getFilteredAds = () => {
-  const params = new URLSearchParams(window.location.search);
-
-  const adName = params.get("name") ? `name=${params.get("name")}` : "";
-  const adVenta = params.get("venta") ? `venta=${params.get("venta")}` : "";
-  const adTag = params.get("tag") ? `tag=${params.get("tag")}` : "";
-  const adPrice =
-    params.get("pricemin") || params.get("pricemax")
-      ? `price=${params.get("pricemin")}-${params.get("pricemax")}`
-      : "";
-
+export const getFilteredAds = async (url) => {
   axios.defaults.withCredentials = true;
 
-  const res = axios.get(
-    `${API_URL}/anuncios?${adName}&${adVenta}&${adTag}&${adPrice}`,
-  );
+  const res = axios.get(url);
   return res;
 };
 

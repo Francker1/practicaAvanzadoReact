@@ -6,7 +6,7 @@ import Login from "../login/Login";
 import Register from "../register/Register";
 import AdsBoard from "../AdsBoard";
 import AdDetail from "../AdsDetail";
-import AdsFiltered from "../ads/AdsFiltered";
+import AdsFiltered from "../AdsFiltered";
 import CreateAdForm from "../AdsForms/CreateAd";
 import EditAdForm from "../AdsForms/EditAd";
 import Favorites from "../Favs";
