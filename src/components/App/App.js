@@ -7,8 +7,8 @@ import Register from "../register/Register";
 import AdsBoard from "../AdsBoard";
 import AdDetail from "../AdsDetail";
 import AdsFiltered from "../ads/AdsFiltered";
-import CreateAdForm from "../forms/CreateAd";
-import EditAdForm from "../forms/EditAd";
+import CreateAdForm from "../AdsForms/CreateAd";
+import EditAdForm from "../AdsForms/EditAd";
 import Favorites from "../Favs";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

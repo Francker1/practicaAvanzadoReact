@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { FormButton } from "../common/buttons/btn";
 
 import { getAdByID, updateAdvert } from "../../services/KeepAds_API";
-import  BackButton  from "./../common/buttons/ButtonBack";
+import  BackButton  from "../common/buttons/ButtonBack";
 
 
 function EditAdForm(){

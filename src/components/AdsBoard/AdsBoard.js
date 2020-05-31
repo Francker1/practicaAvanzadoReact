@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 //import T from "prop-types";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import Filter from "../forms/Filters";
+import Filter from "../AdsForms/Filters";
 import AdsGrid from "../AdsGrid";
 
 import { fetchAds } from "../../store/actions";
