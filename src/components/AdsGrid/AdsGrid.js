@@ -52,7 +52,7 @@ function AdCard({
           </Card.Body>
         </Card>
       </Link>
-      <ButtonFavs action={onAddToFavsClick} />{" "}
+      <ButtonFavs className="button-click" action={onAddToFavsClick} />{" "}
     </>
   );
 }
