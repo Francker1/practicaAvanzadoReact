@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 //import T from "prop-types";
 import { Link } from "react-router-dom";
@@ -10,29 +10,29 @@ import AdsGrid from "../AdsGrid";
 import { fetchAds } from "../../store/actions";
 
 function ButtonCreateAd() {
-    return (
-        <Row>
-            <Col>
-                <Link className="create-link" to="/crear">
-                    Crear anuncio
-                </Link>
-            </Col>
-        </Row>
-    );
+  return (
+    <Row>
+      <Col>
+        <Link className="create-link" to="/crear">
+          Crear anuncio
+        </Link>
+      </Col>
+    </Row>
+  );
 }
 
 export default function AdsBoard() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchAds());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchAds());
+  }, [dispatch]);
 
-    return (
-        <Container>
-            <Filter />
-            <ButtonCreateAd />
-            <AdsGrid />
-        </Container>
-    );
+  return (
+    <Container>
+      <Filter />
+      <ButtonCreateAd />
+      <AdsGrid />
+    </Container>
+  );
 }

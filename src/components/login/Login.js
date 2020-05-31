@@ -10,9 +10,9 @@ import { loginUser } from "../../services/KeepAds_API";
 function Login() {
   const history = useHistory();
 
-  const handleSubmit = async data => {
+  const handleSubmit = async (data) => {
     await loginUser(data.username, data.password)
-      .then(res => {
+      .then((res) => {
         localStorage.setItem("user", data.username);
         localStorage.setItem("loggedIn", res.data.success);
         history.push("/ads");
