@@ -20,11 +20,6 @@ export function getItemsFavs(state) {
   return data;
 }
 
-export function getItemsInFavs(state) {
-  const favs = getFavs(state);
-  return Object.values(favs);
-}
-
 export function getUserInfo(state) {
   const user = getUser(state);
   return user;
